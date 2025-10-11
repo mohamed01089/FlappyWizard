@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://dghnctyq1u5g8"]
+
+[ext_resource type="Script" uid="uid://csvi6eu6j5t53" path="res://settings.gd" id="1_nkug2"]
+[ext_resource type="Texture2D" uid="uid://3crhwu2jqkva" path="res://assets/back.png" id="1_x2hje"]
+[ext_resource type="Texture2D" uid="uid://v7l30os24o0q" path="res://assets/Mbg (1).png" id="2_cj1lu"]
+[ext_resource type="Texture2D" uid="uid://qgountygtrnd" path="res://assets/Toggle On2.png" id="4_cj1lu"]
+[ext_resource type="Texture2D" uid="uid://p85ns8saqidt" path="res://assets/Toggle Off2.png" id="5_71mqq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwo76"]
+bg_color = Color(0.75819176, 0.7581918, 0.75819165, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gc0em"]
+bg_color = Color(1, 0.33333334, 0.34117648, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+shadow_size = 10
+
+[sub_resource type="Theme" id="Theme_3j6r5"]
+
+[node name="Settings" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jwo76")
+script = ExtResource("1_nkug2")
+
+[node name="Bg" type="Sprite2D" parent="."]
+modulate = Color(0.5449743, 0.54497427, 0.54497427, 1)
+position = Vector2(434, 468)
+scale = Vector2(1, 1.2187499)
+texture = ExtResource("2_cj1lu")
+
+[node name="BackGround" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BgSound" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -267.0
+offset_top = -177.0
+offset_right = 267.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_gc0em")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 44.0
+offset_right = 92.0
+offset_bottom = 102.0
+icon = ExtResource("1_x2hje")
+
+[node name="CheckButton" type="CheckButton" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -472.00006
+offset_top = -269.0
+offset_right = 1180.0
+offset_bottom = 403.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.43, 0.43)
+theme = SubResource("Theme_3j6r5")
+theme_override_icons/checked = ExtResource("4_cj1lu")
+theme_override_icons/unchecked = ExtResource("5_71mqq")
+
+[node name="Text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -192.0
+offset_right = 56.0
+offset_bottom = -54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.27752772, 0.27752772, 0.27752772, 1)
+theme_override_font_sizes/font_size = 101
+text = "Sound"
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="button_down" from="CheckButton" to="." method="_on_check_button_button_down"]
+[connection signal="toggled" from="CheckButton" to="." method="_on_check_button_toggled"]

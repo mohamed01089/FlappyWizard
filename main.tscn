@@ -1,0 +1,84 @@
+[gd_scene load_steps=15 format=3 uid="uid://db3x6hhv5s5yi"]
+
+[ext_resource type="Script" uid="uid://bd860lcnctahd" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cr3pl7yfk32tb" path="res://scenes/pipe.tscn" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://b6xt1pam4caki" path="res://scenes/bird.tscn" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://v7l30os24o0q" path="res://assets/Mbg (1).png" id="3_4c57u"]
+[ext_resource type="PackedScene" uid="uid://d2ort7tfi33lg" path="res://scenes/ground.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://snrvq7jkapgf" path="res://scenes/game_over.tscn" id="6_7mycd"]
+[ext_resource type="FontFile" uid="uid://bnjrdtoelybmv" path="res://assets/COLORA.otf" id="6_efxa6"]
+[ext_resource type="AudioStream" uid="uid://dgof2bi0c63yw" path="res://assets/HitSfx.mp3" id="7_272bh"]
+[ext_resource type="AudioStream" uid="uid://wb5gtd77xd7u" path="res://assets/Score.mp3" id="8_4c57u"]
+[ext_resource type="AudioStream" uid="uid://wtf2dwp5p42l" path="res://assets/JumpSfx.mp3" id="8_5vw27"]
+[ext_resource type="Texture2D" uid="uid://btf1sfptu7qpc" path="res://assets/yupp-generated-image-980697.png" id="9_kek77"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4c57u"]
+texture = ExtResource("9_kek77")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kek77"]
+texture = ExtResource("9_kek77")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_efxa6"]
+texture = ExtResource("9_kek77")
+
+[node name="Main" type="Node"]
+script = ExtResource("1_h2yge")
+pipe_scene = ExtResource("2_lquwl")
+
+[node name="background" type="Sprite2D" parent="."]
+modulate = Color(0.7162962, 0.7162962, 0.7162962, 1)
+position = Vector2(432, 384)
+texture = ExtResource("3_4c57u")
+
+[node name="Bird" parent="." instance=ExtResource("3_1bvp3")]
+position = Vector2(432, 384)
+
+[node name="Ground" parent="." instance=ExtResource("4_1bvp3")]
+z_index = 1
+
+[node name="PipeTimer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_efxa6")
+theme_override_font_sizes/font_size = 45
+text = "Score: 0"
+
+[node name="sfxHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_272bh")
+
+[node name="sfxJump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_5vw27")
+
+[node name="sfxScore" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_4c57u")
+
+[node name="GameOver" parent="." instance=ExtResource("6_7mycd")]
+
+[node name="Exit" type="Button" parent="GameOver"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_top = 418.0
+offset_right = 70.0
+offset_bottom = 481.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_4c57u")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kek77")
+theme_override_styles/hover = SubResource("StyleBoxTexture_efxa6")
+
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]
+[connection signal="pressed" from="GameOver/Exit" to="." method="_on_exit_pressed"]

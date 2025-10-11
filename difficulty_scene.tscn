@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://bq2ev1us20l24"]
+
+[ext_resource type="Texture2D" uid="uid://d38ceuoo614k4" path="res://assets/bg.png" id="1_88kuk"]
+[ext_resource type="Script" uid="uid://bm5bbv46t0j66" path="res://difficulty_scene.gd" id="1_iw4iq"]
+[ext_resource type="FontFile" uid="uid://bnjrdtoelybmv" path="res://assets/COLORA.otf" id="2_iw4iq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ee4bf"]
+texture = ExtResource("1_88kuk")
+modulate_color = Color(0.3137255, 0.3137255, 0.3137255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kbped"]
+bg_color = Color(1, 0.33333334, 0.34117648, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 10
+
+[node name="Difficulty Scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iw4iq")
+
+[node name="BackGround" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ee4bf")
+
+[node name="Difficulty" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49100003
+anchor_top = 0.21000001
+anchor_right = 0.49100003
+anchor_bottom = 0.21000001
+offset_left = -262.6268
+offset_top = -80.56001
+offset_right = 262.85928
+offset_bottom = 80.43999
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9647059, 0.7882353, 0, 1)
+theme_override_fonts/font = ExtResource("2_iw4iq")
+theme_override_font_sizes/font_size = 146
+text = "Difficulty"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.5
+offset_top = -51.611115
+offset_right = 88.5
+offset_bottom = 51.611115
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 19
+
+[node name="Easy" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_kbped")
+text = "Easy"
+
+[node name="Medium" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_kbped")
+text = "Medium"
+
+[node name="Hard" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_kbped")
+text = "Hard"
+
+[connection signal="pressed" from="VBoxContainer/Easy" to="." method="_on_easy_pressed"]
+[connection signal="pressed" from="VBoxContainer/Medium" to="." method="_on_medium_pressed"]
+[connection signal="pressed" from="VBoxContainer/Hard" to="." method="_on_hard_pressed"]
